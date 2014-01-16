@@ -3,11 +3,13 @@ package org.billschofield.tdd.wordfinder;
 import java.util.List;
 
 public class WordFinder {
-    public WordFinder(List<String> dictionary) {
+    private List<String> dictionary;
 
+    public WordFinder(List<String> dictionary) {
+        this.dictionary = dictionary;
     }
 
     public String findWordsIn(String source) {
-        return null;
+        return dictionary.get(0);
     }
 }
