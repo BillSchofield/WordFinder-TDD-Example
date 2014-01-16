@@ -1,5 +1,6 @@
 package org.billschofield.tdd.wordfinder;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -10,26 +11,41 @@ import static org.junit.Assert.assertThat;
 
 public class WordFinderTest {
 
+    private List<String> dictionary;
+    private WordFinder wordFinder;
+
+    @Before
+    public void setUp() throws Exception {
+        dictionary = new ArrayList<String>();
+        wordFinder = new WordFinder(dictionary);
+    }
+
     @Test
     public void shouldFindWordWhenTheEntireStringIsADictionaryWord() {
-        String theWord = "paisley";
-        List<String> dictionary = new ArrayList<String>();
         dictionary.add("paisley");
-        WordFinder wordFinder = new WordFinder(dictionary);
 
-        String wordsInDictionary = wordFinder.findWordsIn(theWord);
+        String wordsInDictionary = wordFinder.findWordsIn("paisley");
 
-        assertThat(wordsInDictionary, is(theWord));
+        assertThat(wordsInDictionary, is("paisley"));
     }
 
     @Test
     public void shouldFindTheDictionaryWordWhenTheStringStartsWithADictionaryWord() {
-        List<String> dictionary = new ArrayList<String>();
         dictionary.add("ant");
-        WordFinder wordFinder = new WordFinder(dictionary);
 
         String wordsInDictionary = wordFinder.findWordsIn("antebellum");
 
         assertThat(wordsInDictionary, is("ant"));
     }
+
+    @Test
+    public void shouldFindWordWhenTheEntireStringIsADictionaryWordAndThereIsMoreThanOneWordInTheDictionary() {
+        dictionary.add("park");
+        dictionary.add("paisley");
+
+        String wordsInDictionary = wordFinder.findWordsIn("paisley");
+
+        assertThat(wordsInDictionary, is("paisley"));
+    }
+
 }
