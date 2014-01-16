@@ -11,10 +11,10 @@ public class WordFinder {
 
     public String findWordsIn(String source) {
         for (String word : dictionary) {
-            if (word.equals(source)){
+            if (source.contains(word)){
                 return word;
             }
         }
-        return dictionary.get(0);
+        return "";
     }
 }

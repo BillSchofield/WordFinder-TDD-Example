@@ -48,4 +48,13 @@ public class WordFinderTest {
         assertThat(wordsInDictionary, is("paisley"));
     }
 
+    @Test
+    public void shouldFindNothingWordWhenTheStringContainsNoDictionaryWords() {
+        dictionary.add("park");
+
+        String wordsInDictionary = wordFinder.findWordsIn("qqq");
+
+        assertThat(wordsInDictionary, is(""));
+    }
+
 }
