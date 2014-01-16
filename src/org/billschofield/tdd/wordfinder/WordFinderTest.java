@@ -6,8 +6,11 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.matchers.JUnitMatchers.containsString;
 
 public class WordFinderTest {
 
@@ -50,11 +53,22 @@ public class WordFinderTest {
 
     @Test
     public void shouldFindNothingWordWhenTheStringContainsNoDictionaryWords() {
-        dictionary.add("park");
+        dictionary.add("paisley");
 
         String wordsInDictionary = wordFinder.findWordsIn("qqq");
 
         assertThat(wordsInDictionary, is(""));
+    }
+
+    @Test
+    public void shouldFindMultipleWords() {
+        dictionary.add("paisley");
+        dictionary.add("isle");
+        dictionary.add("prince");
+
+        String wordsInDictionary = wordFinder.findWordsIn("paisley");
+
+        assertThat(wordsInDictionary, allOf(containsString("paisley"), anyOf(containsString("isle,"), containsString("\nisle"))));
     }
 
 }
